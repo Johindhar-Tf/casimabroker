@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm create vite@latest . -- --template react --yes)",
+      "Bash(npm run build)",
+      "Bash(git add -A)"
+    ]
+  }
+}
