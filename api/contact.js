@@ -1,17 +1,20 @@
 import { Resend } from 'resend'
 
 export default async function handler(req, res) {
+  // CORS headers — use ALLOWED_ORIGIN if set, otherwise allow any origin
+  const allowedOrigin = process.env.ALLOWED_ORIGIN || '*'
+  res.setHeader('Access-Control-Allow-Origin', allowedOrigin)
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS')
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
+
+  // Handle preflight
+  if (req.method === 'OPTIONS') {
+    return res.status(204).end()
+  }
+
   // Only allow POST
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method Not Allowed' })
-  }
-
-  // CORS origin check
-  const allowedOrigin = process.env.ALLOWED_ORIGIN
-  const requestOrigin = req.headers.origin
-
-  if (allowedOrigin && requestOrigin !== allowedOrigin) {
-    return res.status(403).json({ error: 'Forbidden' })
   }
 
   try {
