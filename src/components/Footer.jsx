@@ -13,7 +13,7 @@ export default function Footer() {
         <img
           src={logo}
           alt="Casa Mia Real Estate"
-          className="h-16 w-auto object-contain brightness-0 invert"
+          className="h-16 w-auto object-contain"
         />
 
         {/* Tagline */}
